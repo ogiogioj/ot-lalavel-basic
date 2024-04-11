@@ -1,0 +1,11 @@
+.registerBox {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.registerTitle {
+    display: flex;
+    justify-content: center;
+}
+

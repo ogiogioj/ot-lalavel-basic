@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Commet extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['body', 'user_id', 'article_id'];
 }

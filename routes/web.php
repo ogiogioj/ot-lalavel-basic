@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommetController;
 use App\Models\Article;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -57,3 +58,4 @@ require __DIR__ . '/auth.php';
 
 Route::resource('articles',ArticleController::class);
 
+Route::resource('comments',CommetController::class);

@@ -29,7 +29,15 @@ class CommetController extends Controller
      */
     public function store(StoreCommetRequest $request)
     {
-        //
+       $input = $request->validated();
+
+       Commet::create([
+        'article_id'=>$input['article_id'],
+        'user_id'=>$request->user()->id,
+        'body'=>$input['body']
+       ]);
+
+       return redirect()->route('articles.show',['article'=>$input['article_id']]);
     }
 
     /**

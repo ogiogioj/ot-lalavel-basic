@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCommetRequest;
-use App\Http\Requests\UpdateCommetRequest;
-use App\Models\Commet;
+use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
+use App\Models\Comment;
 
-class CommetController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,11 +27,11 @@ class CommetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCommetRequest $request)
+    public function store(StoreCommentRequest $request)
     {
        $input = $request->validated();
 
-       Commet::create([
+       Comment::create([
         'article_id'=>$input['article_id'],
         'user_id'=>$request->user()->id,
         'body'=>$input['body']
@@ -43,7 +43,7 @@ class CommetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Commet $commet)
+    public function show(Comment $Comment)
     {
         //
     }
@@ -51,7 +51,7 @@ class CommetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Commet $commet)
+    public function edit(Comment $Comment)
     {
         //
     }
@@ -59,7 +59,7 @@ class CommetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCommetRequest $request, Commet $commet)
+    public function update(UpdateCommentRequest $request, Comment $Comment)
     {
         //
     }
@@ -67,7 +67,7 @@ class CommetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Commet $commet)
+    public function destroy(Comment $Comment)
     {
         //
     }

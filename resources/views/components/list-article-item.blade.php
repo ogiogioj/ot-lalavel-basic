@@ -2,7 +2,8 @@
     <p> {{ $article->body }}</p>
     <p>
     {{-- profileController --}}
-        <a href="{{ route('profile', ['user' => $article->user->id]) }}">{{ $article->user->name }}</a>
+        <a href="{{ route('profile', ['user' => $article->user->username]) }}">
+            {{ $article->user->name }}</a>
     </p>
 
     <p class="text-xs text-gray-500">

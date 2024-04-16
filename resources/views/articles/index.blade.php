@@ -7,15 +7,7 @@
 
     <div class="container p-5 mx-auto">
         @foreach ($articles as $article)
-            <div class="background-white border rounded mb-3 p-3">
-                <p> {{ $article->body }}</p>
-                <p> {{ $article->user->name }}</p>
-                <p><a href="{{ route('articles.show', ['article' => $article->id]) }}">
-                        {{ $article->created_at->diffForHumans() }}</a></p>
-
-                <x-article-button-group :article=$article />
-
-            </div>
+            <x-list-article-item :article=$article/>
         @endforeach
     </div>
     <div class="container p-5">

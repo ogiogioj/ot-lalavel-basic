@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CommentController;
 use App\Models\Article;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,4 +63,8 @@ Route::resource('comments',CommentController::class);
 Route::get('profile/{user:username}',[ProfileController::class, 'show'])
 ->name('profile')
 ->where('user','^[A-Za-z0-9-]+$');
+
+Route::post('follow/{user}]', [FollowController::class,'store'])->name('follow');
+
+Route::delete('follow/{user}]', [FollowController::class,'destroy'])->name('unfollow');
 

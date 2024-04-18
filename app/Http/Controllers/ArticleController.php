@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateArticleRequest;
-use App\Http\Requests\DestroyArticleRequest;
-use App\Http\Requests\UpdateArticleRequest;
-use App\Http\Requests\EditArticleRequest;
 use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\EditArticleRequest;
+use Illuminate\Database\Eloquent\Builder;
+use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use App\Http\Requests\DestroyArticleRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class ArticleController extends Controller
 {
 
@@ -37,20 +40,30 @@ class ArticleController extends Controller
         return redirect()->route('articles.index');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $q = $request ->input('q');
+
+
         $articles = Article::with('user')
             ->withCount('comments')
             ->withExists(
                 ['comments as recent_comments'=> function($query){
                     $query->where('created_at','>',Carbon::now()->subDay());
                 }])
+            ->when($q, function($query,$q){
+                $query->where('body','like',"%$q%")
+                ->orwhereHas('user',function(Builder $query) use($q){
+                    $query->where('username','like',"%$q%");
+            });
+        })
             ->latest()
             ->paginate();
         return view(
             'articles.index',
             [
                 'articles' => $articles,
+                'q' => $q,
             ]
         );
     }
